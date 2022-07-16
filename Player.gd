@@ -8,6 +8,10 @@ var DURATION = 0.5
 var direction = Vector3.ZERO
 var progress = 0
 
+func _ready():
+	for i in range($Pivot/MeshInstance.get_child_count()):
+		$Pivot/MeshInstance.get_child(i).set_value(i)
+
 func _physics_process(delta):
 	move_and_collide((direction + 1 * Vector3.DOWN) * delta / DURATION)
 	
