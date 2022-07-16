@@ -23,8 +23,10 @@ func _input(event):
 			if diff.length() > 100:
 				if abs(diff.x) > 2 * abs(diff.y):
 					direction = Vector3.LEFT * sign(diff.x) * 2
+					emit_signal("moved")
 				elif abs(diff.y) > 2 * abs(diff.x):
 					direction = Vector3.FORWARD * sign(diff.y) * 2
+					emit_signal("moved")
 			click = Vector2.ZERO
 
 func _physics_process(delta):
