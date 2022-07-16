@@ -1,11 +1,11 @@
 extends Spatial
 
-var _value = 0
+var value = 0
 
-func set_value(value):
-	_value = value
-	for i in range(get_child_count()):
-		if i == _value:
-			get_child(i).show()
+func set_value(new_value):
+	value = new_value
+	for i in range($sides.get_child_count()):
+		if i == value:
+			$sides.get_child(i).show()
 		else:
-			get_child(i).hide()
+			$sides.get_child(i).hide()

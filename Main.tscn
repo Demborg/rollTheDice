@@ -1,10 +1,11 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://fonts/Roboto-Black.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://MovesLabel.gd" type="Script" id=3]
 [ext_resource path="res://Main.gd" type="Script" id=4]
 [ext_resource path="res://Target.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Progress.gd" type="Script" id=6]
 
 [sub_resource type="BoxShape" id=1]
 extents = Vector3( 5, 1, 5 )
@@ -31,6 +32,8 @@ script = ExtResource( 4 )
 
 [node name="Ground" type="StaticBody" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0 )
+collision_layer = 8
+collision_mask = 0
 
 [node name="CollisionShape" type="CollisionShape" parent="Ground"]
 shape = SubResource( 1 )
@@ -41,7 +44,11 @@ material/0 = null
 
 [node name="Target" parent="Ground" instance=ExtResource( 5 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
-value = 2
+value = 3
+
+[node name="Target2" parent="Ground" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 4 )
+value = 1
 
 [node name="DirectionalLight" type="DirectionalLight" parent="."]
 transform = Transform( 0.410082, 0.516262, 0.751868, -0.912049, 0.232126, 0.338061, 0, -0.824373, 0.566047, 6.98924, 22.2052, 14.5841 )
@@ -77,6 +84,8 @@ margin_bottom = 57.0
 theme = SubResource( 4 )
 text = "0%"
 align = 2
+script = ExtResource( 6 )
+targets = 2
 
 [node name="Retry" type="ColorRect" parent="UserInterface"]
 anchor_right = 1.0
@@ -89,12 +98,37 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -95.0
-margin_top = -13.5
+margin_top = -28.5
 margin_right = 95.0
-margin_bottom = 13.5
+margin_bottom = 28.5
 theme = SubResource( 6 )
 custom_colors/font_color = Color( 0.309804, 0.709804, 1, 1 )
-text = "Press enter to retry"
+text = "You died
+press enter to retry"
+align = 1
 
+[node name="Win" type="ColorRect" parent="UserInterface"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 1, 1, 1, 0.619608 )
+
+[node name="Label" type="Label" parent="UserInterface/Win"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -104.0
+margin_top = -28.5
+margin_right = 104.0
+margin_bottom = 28.5
+theme = SubResource( 6 )
+custom_colors/font_color = Color( 0.309804, 1, 0.498039, 1 )
+text = "You won!
+press enter to restart"
+align = 1
+
+[connection signal="hit" from="Ground/Target" to="UserInterface/Progress" method="_on_Target_hit"]
+[connection signal="hit" from="Ground/Target2" to="UserInterface/Progress" method="_on_Target_hit"]
 [connection signal="dead" from="Player" to="." method="_on_Player_dead"]
 [connection signal="moved" from="Player" to="UserInterface/MovesLabel" method="_on_Player_moved"]
+[connection signal="win" from="UserInterface/Progress" to="." method="_on_Progress_win"]
