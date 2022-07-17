@@ -8,7 +8,7 @@ var DURATION = 0.5
 var direction = Vector3.ZERO
 var progress = 0
 
-var click = Vector2.ZERO
+var click = null
 
 func _ready():
 	for i in range($Pivot/MeshInstance.get_child_count()):
@@ -18,9 +18,9 @@ func _input(event):
 	if event is InputEventMouseButton:
 		if event.pressed:
 			click = event.position
-		else:
+		elif click:
 			var diff = click - event.position
-			if diff.length() > 100:
+			if diff.length() > 200:
 				if abs(diff.x) > 1.5 * abs(diff.y):
 					direction = Vector3.LEFT * sign(diff.x) * 2
 					emit_signal("moved")
