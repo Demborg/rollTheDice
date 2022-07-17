@@ -2,6 +2,8 @@ extends Node
 
 export (PackedScene) var target_scene
 
+var rng = RandomNumberGenerator.new()
+
 func _make_and_connect_target(position: Vector3, value: int):
 	var target = target_scene.instance()
 	target.value = value
@@ -13,14 +15,15 @@ func _make_and_connect_target(position: Vector3, value: int):
 func _make_and_connect_random_target():
 	_make_and_connect_target(
 		Vector3(
-			2 * Global.rng.randi_range(-2, 2),
+			2 * rng.randi_range(-2, 2),
 			1,
-			2 * Global.rng.randi_range(-2, 2)
+			2 * rng.randi_range(-2, 2)
 		),
-		Global.rng.randi_range(1, 6)
+		rng.randi_range(1, 6)
 	)
 
 func _ready():
+	rng.seed = Global.level
 	$UserInterface/Retry.hide()
 	$UserInterface/Win.hide()
 	
