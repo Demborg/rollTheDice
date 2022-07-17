@@ -35,7 +35,8 @@ func _ready():
 			_make_and_connect_random_target()
 			
 func _on_Player_dead():
-	$UserInterface/Retry.show()
+	if not $UserInterface/Win.visible:
+		$UserInterface/Retry.show()
 	
 func _input(event):
 	if event.is_action("ui_accept") or event is InputEventMouseButton:
