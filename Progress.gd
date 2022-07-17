@@ -2,7 +2,7 @@ extends Label
 
 signal win
 
-export(int) var targets
+var targets = 0
 var progress = 0
 
 func _on_Target_hit():
