@@ -4,6 +4,7 @@ signal dead
 signal moved
 
 var DURATION = 0.5
+var SWIPE_TRANSFORM = Transform2D(deg2rad(-15), Vector2(0, 0))
 
 var direction = Vector3.ZERO
 var progress = 0
@@ -19,12 +20,13 @@ func _input(event):
 		if event.pressed:
 			click = event.position
 		elif click:
-			var diff = click - event.position
+			var diff = SWIPE_TRANSFORM * (click - event.position)
+			
 			if diff.length() > 200:
-				if abs(diff.x) > 1.5 * abs(diff.y):
+				if abs(diff.x) > 2 * abs(diff.y):
 					direction = Vector3.LEFT * sign(diff.x) * 2
 					emit_signal("moved")
-				elif abs(diff.y) > 1.5 * abs(diff.x):
+				elif abs(diff.y) > 2 * abs(diff.x):
 					direction = Vector3.FORWARD * sign(diff.y) * 2
 					emit_signal("moved")
 			click = Vector2.ZERO
