@@ -149,7 +149,6 @@ transform = Transform( 0.912056, -0.256983, 0.319553, -0.0891389, 0.636392, 0.76
 fov = 26.0
 size = 25.0
 near = 0.01
-far = 76.4
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -2 )
