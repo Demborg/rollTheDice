@@ -4,6 +4,9 @@ export (PackedScene) var target_scene
 
 var rng = RandomNumberGenerator.new()
 
+func _reset():
+	get_tree().reload_current_scene()
+
 func _make_and_connect_target(position: Vector3, value: int):
 	var target = target_scene.instance()
 	target.value = value
@@ -39,10 +42,15 @@ func _on_Player_dead():
 		$UserInterface/Retry.show()
 	
 func _input(event):
+	if event.is_action("reset"):
+		_reset()
 	if event.is_action("ui_accept") or event is InputEventMouseButton:
 		if $UserInterface/Retry.visible or $UserInterface/Win.visible:
-			get_tree().reload_current_scene()
+			_reset()
 
 func _on_Progress_win():
 	$UserInterface/Win.show()
 	Global.level += 1
+
+func _on_ResetButton_pressed():
+	_reset()
