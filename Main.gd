@@ -46,7 +46,7 @@ func _unhandled_input(event):
 	if event.is_action("reset"):
 		_reset()
 	if event.is_action("ui_accept") or event is InputEventMouseButton:
-		if $UserInterface/win.visible:
+		if $UserInterface/Win.visible:
 			_on_Proceed()
 		elif $UserInterface/Retry.visible:
 			_reset()
