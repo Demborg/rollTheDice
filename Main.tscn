@@ -10,6 +10,8 @@
 [ext_resource path="res://fonts/Roboto-Bold.ttf" type="DynamicFontData" id=8]
 [ext_resource path="res://level.gd" type="Script" id=9]
 [ext_resource path="res://resources/circular-arrow.svg" type="Texture" id=10]
+[ext_resource path="res://resources/textTheme.tres" type="Theme" id=11]
+[ext_resource path="res://ShareButton.gd" type="Script" id=12]
 
 [sub_resource type="DynamicFont" id=7]
 size = 1024
@@ -28,13 +30,6 @@ font_data = ExtResource( 2 )
 
 [sub_resource type="Theme" id=4]
 default_font = SubResource( 3 )
-
-[sub_resource type="DynamicFont" id=5]
-size = 100
-font_data = ExtResource( 2 )
-
-[sub_resource type="Theme" id=6]
-default_font = SubResource( 5 )
 
 [node name="Main" type="Node"]
 script = ExtResource( 4 )
@@ -177,7 +172,6 @@ align = 2
 script = ExtResource( 6 )
 
 [node name="Retry" type="ColorRect" parent="UserInterface"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color( 1, 1, 1, 0.619608 )
@@ -191,11 +185,23 @@ margin_left = -433.5
 margin_top = -119.5
 margin_right = 433.5
 margin_bottom = 119.5
-theme = SubResource( 6 )
+theme = ExtResource( 11 )
 custom_colors/font_color = Color( 0.309804, 0.709804, 1, 1 )
 text = "You died
 press enter to retry"
 align = 1
+
+[node name="Retry" type="Button" parent="UserInterface/Retry"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -127.5
+margin_top = 133.0
+margin_right = 127.5
+margin_bottom = 257.0
+theme = ExtResource( 11 )
+text = "Retry"
 
 [node name="Win" type="ColorRect" parent="UserInterface"]
 visible = false
@@ -212,11 +218,32 @@ margin_left = -508.5
 margin_top = -119.5
 margin_right = 508.5
 margin_bottom = 119.5
-theme = SubResource( 6 )
+theme = ExtResource( 11 )
 custom_colors/font_color = Color( 0.309804, 1, 0.498039, 1 )
 text = "You won!
 press enter to proceed"
 align = 1
+
+[node name="ShareButton" type="Button" parent="UserInterface/Win"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -363.0
+margin_top = 133.0
+margin_right = -87.0
+margin_bottom = 257.0
+theme = ExtResource( 11 )
+text = "Share"
+script = ExtResource( 12 )
+
+[node name="Proceed" type="Button" parent="UserInterface/Win"]
+margin_left = 542.0
+margin_top = 1093.0
+margin_right = 929.0
+margin_bottom = 1217.0
+theme = ExtResource( 11 )
+text = "Proceed"
 
 [node name="ResetButton" type="TextureButton" parent="UserInterface"]
 anchor_left = 1.0
@@ -237,4 +264,7 @@ omni_attenuation = 0.378929
 [connection signal="dead" from="Player" to="." method="_on_Player_dead"]
 [connection signal="moved" from="Player" to="UserInterface/MovesLabel" method="_on_Player_moved"]
 [connection signal="win" from="UserInterface/Progress" to="." method="_on_Progress_win"]
+[connection signal="pressed" from="UserInterface/Retry/Retry" to="." method="_on_ResetButton_pressed"]
+[connection signal="pressed" from="UserInterface/Win/ShareButton" to="UserInterface/Win/ShareButton" method="_on_ShareButton_pressed"]
+[connection signal="pressed" from="UserInterface/Win/Proceed" to="." method="_on_Proceed"]
 [connection signal="pressed" from="UserInterface/ResetButton" to="." method="_on_ResetButton_pressed"]

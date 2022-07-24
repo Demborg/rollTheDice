@@ -26,7 +26,6 @@ func _make_and_connect_random_target():
 	)
 
 func _ready():
-	print(Global.color, Global.global_seed)
 	$DirectionalLight.light_color = Global.color
 	rng.seed = Global.level + Global.global_seed
 	$UserInterface/Retry.hide()
@@ -43,16 +42,21 @@ func _on_Player_dead():
 	if not $UserInterface/Win.visible:
 		$UserInterface/Retry.show()
 	
-func _input(event):
+func _unhandled_input(event):
 	if event.is_action("reset"):
 		_reset()
 	if event.is_action("ui_accept") or event is InputEventMouseButton:
-		if $UserInterface/Retry.visible or $UserInterface/Win.visible:
+		if $UserInterface/win.visible:
+			_on_Proceed()
+		elif $UserInterface/Retry.visible:
 			_reset()
 
 func _on_Progress_win():
 	$UserInterface/Win.show()
+
+func _on_Proceed():
 	Global.level += 1
+	_reset()
 
 func _on_ResetButton_pressed():
 	_reset()
