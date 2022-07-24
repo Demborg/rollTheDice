@@ -26,7 +26,9 @@ func _make_and_connect_random_target():
 	)
 
 func _ready():
-	rng.seed = Global.level
+	print(Global.color, Global.global_seed)
+	$DirectionalLight.light_color = Global.color
+	rng.seed = Global.level + Global.global_seed
 	$UserInterface/Retry.hide()
 	$UserInterface/Win.hide()
 	
