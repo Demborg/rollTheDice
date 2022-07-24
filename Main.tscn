@@ -172,6 +172,7 @@ align = 2
 script = ExtResource( 6 )
 
 [node name="Retry" type="ColorRect" parent="UserInterface"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color( 1, 1, 1, 0.619608 )
@@ -204,7 +205,6 @@ theme = ExtResource( 11 )
 text = "Retry"
 
 [node name="Win" type="ColorRect" parent="UserInterface"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color( 1, 1, 1, 0.619608 )
