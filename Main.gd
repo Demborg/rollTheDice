@@ -21,6 +21,8 @@ func _random_position():
 	return 2 * Vector2(rng.randi_range(-2, 2), rng.randi_range(-2, 2))
 	
 func invalid(pos: Vector2, val: int):
+	if pos in [Vector2(0, -2), Vector2(0, -4), Vector2(-2, -4)]:
+		return true
 	return pos in targets.keys()
 	
 func _make_and_connect_random_target():
