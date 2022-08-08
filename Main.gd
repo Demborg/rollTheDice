@@ -23,6 +23,8 @@ func _random_position():
 func invalid(pos: Vector2, val: int):
 	if pos in [Vector2(0, -2), Vector2(0, -4), Vector2(-2, -4)]:
 		return true
+	if (targets.get(pos, -1) + val == 7) and (val in [1, 6]):
+		return false
 	return pos in targets.keys()
 	
 func _make_and_connect_random_target():
