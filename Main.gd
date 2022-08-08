@@ -20,10 +20,13 @@ func _make_and_connect_target(position: Vector2, value: int):
 func _random_position():
 	return 2 * Vector2(rng.randi_range(-2, 2), rng.randi_range(-2, 2))
 	
+func invalid(pos: Vector2, val: int):
+	return pos in targets.keys()
+	
 func _make_and_connect_random_target():
 	var val = rng.randi_range(1, 6)
 	var pos = _random_position()
-	while pos in targets.keys():
+	while invalid(pos, val):
 		pos = _random_position()
 	_make_and_connect_target(pos, val)
 
