@@ -1,5 +1,6 @@
 # Epic Dice Roller
-[](screengrab.png)
+![](screengrab.png)
+
 game built initially for 2022 [GMTK game jam](https://itch.io/jam/gmtk-jam-2022) themed _roll of the dice_.
 
 ## Play
