@@ -1,9 +1,9 @@
 # Epic Dice Roller
 [](screengrab.png)
-A game built initially for 2022 [GMTK game jam](https://itch.io/jam/gmtk-jam-2022) themed _roll of the dice_.
+game built initially for 2022 [GMTK game jam](https://itch.io/jam/gmtk-jam-2022) themed _roll of the dice_.
 
 ## Play
-The game is most up to date on [my page](demb.org/rollTheDice) but it can also be found on [itch.io](https://demborg.itch.io/epic-dice-roller).
+The game is most up to date on [my page](https://demb.org/rollTheDice) but it can also be found on [itch.io](https://demborg.itch.io/epic-dice-roller).
 
 ### Note
 - Your aim is to roll over the targets on the map with the correct value of your die
