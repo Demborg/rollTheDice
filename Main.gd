@@ -17,11 +17,14 @@ func _make_and_connect_target(position: Vector2, value: int):
 	$UserInterface/Progress.targets += 1
 	$Ground.add_child(target)
 	
+func _random_position():
+	return 2 * Vector2(rng.randi_range(-2, 2), rng.randi_range(-2, 2))
+	
 func _make_and_connect_random_target():
 	var val = rng.randi_range(1, 6)
-	var pos = 2 * Vector2(rng.randi_range(-2, 2), rng.randi_range(-2, 2))
+	var pos = _random_position()
 	while pos in targets.keys():
-		pos = 2 * Vector2(rng._randi_range(-2, 2), rng.randi_range(-2, 2))
+		pos = _random_position()
 	_make_and_connect_target(pos, val)
 
 func _ready():
