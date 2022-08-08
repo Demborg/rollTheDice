@@ -56,6 +56,7 @@ func _on_Progress_win():
 
 func _on_Proceed():
 	Global.level += 1
+	Global.moves += $UserInterface/MovesLabel.moves
 	_reset()
 
 func _on_ResetButton_pressed():
